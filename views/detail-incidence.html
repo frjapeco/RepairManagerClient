@@ -1,0 +1,55 @@
+<div ng-init="init()">
+    <div class="container">
+        <br>
+        <a class="btn btn-primary" href="#/">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Back to Home
+        </a>
+        <h1>Incidence: {{incidence.id}}  </h1>
+        <table class="table well">
+            <tr>
+                <td><strong>Serial Number</strong></td>
+                <td>{{incidence.sn}}</td>
+            </tr>
+            <tr>
+                <td><strong>Model</strong></td>
+                <td>{{incidence.model.name}}</td>
+            </tr>
+            <tr>
+                <td><strong>Description</strong></td>
+                <td>{{incidence.description}}</td>
+            </tr>
+            <tr>
+                <td><strong>Status</strong></td>
+                <td>{{incidence.status.name}}</td>
+            </tr>
+            <tr>
+                <td><strong>Resolution</strong></td>
+                <td>{{incidence.resolution}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client Name</strong></td>
+                <td>{{incidence.clientName}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client Adress</strong></td>
+                <td>{{incidence.clientAddress}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client Postcode</strong></td>
+                <td>{{incidence.clientPostcode}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client City</strong></td>
+                <td>{{incidence.clientCity}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client Phone</strong></td>
+                <td>{{incidence.clientPhone}}</td>
+            </tr>
+            <tr>
+                <td><strong>Client Mail</strong></td>
+                <td>{{incidence.clientMail}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

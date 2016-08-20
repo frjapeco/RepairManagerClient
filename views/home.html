@@ -1,0 +1,157 @@
+<div ng-init="init()">
+    <div class="container">
+        <div class="row">
+
+            <!-- Navbar -->
+
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#/">RepairManager</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#login">
+                                <span class="glyphicon glyphicon-user"></span> Technicians Area
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+
+            <!-- New Incidence form -->
+
+            <div class="col-sm-6">
+                <h3>Request a new repair</h3>
+                <form name="newIncidenceForm" ng-submit="saveIncidence()" class="validable-form well" novalidate>
+
+                    <!-- Serial Number field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.sn.$invalid}">
+                        <input name="sn" class="form-control" type="text" ng-model="incidence.sn" placeholder="Serial Number (must have 9 digits)" minlength="9" maxlength="9" required>                
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.sn.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Model select -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.model.$invalid}">
+                        <select name="model" class="form-control" ng-model="incidence.model" ng-options="model.name for model in models" required>
+                            <option value="">- Choose model -</option>
+                        </select>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.model.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Description textarea -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.description.$invalid}">
+                        <textarea name="description" class="form-control" rows="5" ng-model="incidence.description" placeholder="Description" required>
+                        </textarea>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.description.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client Name field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientName.$invalid}">
+                        <input name="clientName" class="form-control" type="text" ng-model="incidence.clientName" placeholder="Client Name" required>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientName.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client Mail field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientMail.$invalid}">
+                        <input name="clientMail" class="form-control" type="email" ng-model="incidence.clientMail" placeholder="Client Mail" required>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientMail.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client Phone field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientPhone.$invalid}">
+                        <input name="clientPhone" class="form-control" type="text" ng-model="incidence.clientPhone" placeholder="Client Phone" required>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientPhone.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client Address field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientAddress.$invalid}">
+                        <input class="form-control" name="clientAddress" class="form-control" type="text"       ng-model="incidence.clientAddress" placeholder="Client Address" required>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientAddress.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client Postcode field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientPostcode.$invalid}">
+                        <input name="clientPostcode" class="form-control" type="text" ng-model="incidence.clientPostcode" placeholder="Client Postcode" required> 
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientPostcode.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Client City field -->
+
+                    <div class="form-group" ng-class="{'has-error': newIncidenceForm.$submitted && newIncidenceForm.clientCity.$invalid}">
+                        <input name="clientCity" class="form-control" type="text" ng-model="incidence.clientCity" placeholder="Client City" required>
+                        <div class="help-block" ng-messages="newIncidenceForm.$submitted && newIncidenceForm.clientCity.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Submit button -->
+
+                    <input class="btn btn-success" type="submit" value="Send">
+                </form>
+            </div>
+
+            <!-- Search Incidence form -->
+
+            <div class="col-sm-6">
+                <h3>Find your repair</h3>
+                <form name="searchIncidenceForm" ng-submit="findIncidence()" class="well" novalidate>
+
+                    <!-- Incidence Id field -->
+
+                    <div class="form-group" ng-class="{'has-error': searchIncidenceForm.$submitted && searchIncidenceForm.id.$invalid}">
+                        <label class="control-label" for="id">Incidence Id:</label>
+                        <input name="id" class="form-control" type="text" ng-model="incidenceId" required>
+                        <div class="help-block" ng-messages="searchIncidenceForm.$submitted && searchIncidenceForm.id.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Submit button -->
+
+                    <input class="btn btn-success" type="submit" value="Search">
+                </form>
+
+                <!-- Alert message -->
+
+                <div uib-alert ng-show="alert.visible" ng-class="'alert-' + alert.type" close="alert.visible = false">{{alert.msg}}</div>
+            </div>
+        </div>
+    </div>
+</div>

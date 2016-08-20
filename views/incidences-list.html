@@ -1,0 +1,79 @@
+<div ng-init="init()">
+    <div class="container">
+        <div ng-include="'views/templates/navbar.html'"></div>
+        <div class="row">
+
+            <!-- Search form -->
+
+            <div class="col-sm-12">
+                <form class="form-inline">
+
+                    <!-- Status select -->
+
+                    <select class="form-control" ng-model="status" ng-options="status.name for status in statuses" ng-change="loadIncidences()">
+                        <option value="">- All statuses -</option>
+                    </select>
+                    &nbsp;&nbsp;
+
+                    <!-- Search input text -->
+
+                    <div class="input-group">
+                        <input type="text" ng-model="searchPattern" class="search-query form-control" placeholder="Search" ng-change="loadIncidences()"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button" ng-click="loadIncidences()">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                    &nbsp;&nbsp;
+
+                    <!-- Assigned To Me chekcbox -->
+
+                    <label>
+                        <input type="checkbox" ng-model="assignedToMe" ng-change="loadIncidences()">&nbsp;Assigned to me
+                    </label>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- Incidences Result list -->
+
+            <div class="col-sm-12">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Id</th>
+                        <th>SN</th>
+                        <th>Model</th>
+                        <th>Status</th>
+                        <th>Assignee</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="incidence in incidences">
+                            <td class="col-sm-1">
+                                <a href="#/incidence/{{incidence.id}}/edit">{{incidence.id}}</a>
+                            </td>
+                            <td class="col-sm-2">
+                                <a href="#/incidence/{{incidence.id}}/edit">{{incidence.sn}}</a>
+                            </td>
+                            <td class="col-sm-3">
+                                <a href="#/incidence/{{incidence.id}}/edit">{{incidence.model.name}}</a>
+                            </td>
+                            <td class="col-sm-3">
+                                <a href="#/incidence/{{incidence.id}}/edit">{{incidence.status.name}}</a>
+                            </td>
+                            <td class="col-sm-3">
+                                <a href="#/incidence/{{incidence.id}}/edit">{{incidence.technician.username}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 pagination-bar">
+                <div uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()"></div>
+            </div>
+        </div>
+    </div>    
+</div>

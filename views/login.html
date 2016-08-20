@@ -1,0 +1,54 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>RepairManager</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- Login form -->
+
+            <div class="col-sm-6 col-sm-offset-3">
+                <form name="loginForm" class="validable-form well" ng-submit="login()" novalidate>
+
+                    <!-- Username field -->
+
+                    <div class="form-group" ng-class="{'has-error': loginForm.$submitted && loginForm.user.$invalid}">
+                        <label class="control-label" for="user">Login:</label>
+                        <input name="user" class="form-control" type="text" ng-model="user" required>
+                        <div class="help-block" ng-messages="loginForm.$submitted && loginForm.user.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Password field -->
+
+                    <div class="form-group" ng-class="{'has-error': loginForm.$submitted && loginForm.password.$invalid}">
+                        <label class="control-label" for="password">Password:</label>
+                        <input name="password" class="form-control" type="password" ng-model="password" required>
+                        <div class="help-block" ng-messages="loginForm.$submitted && loginForm.password.$error">
+                            <div ng-messages-include="views/templates/messages.html"></div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Submit button -->
+
+                    <input class="btn btn-success" type="submit" value="Login">
+
+                    <!-- Cancel button -->
+                    
+                    <a class="btn btn-default" href="#/">Cancel</a>
+                </form>
+
+                <!-- Alert message -->
+
+                <div uib-alert ng-show="alert.visible" ng-class="'alert-' + alert.type" close="alert.visible = false">
+                    {{alert.msg}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
