@@ -1,9 +1,5 @@
-// Filters resume:
-
 app.filter('getByName',getByName);
 
-
-// Filters implementation:
 
 function getByName() {
     return function(array, name) {

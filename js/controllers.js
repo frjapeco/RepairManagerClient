@@ -1,5 +1,3 @@
-// Controllers resume:
-
 app.controller('InfoPopupController',InfoPopupController);
 app.controller('LoginController',LoginController);
 app.controller('HomeController',HomeController);
@@ -7,8 +5,6 @@ app.controller('DetailIncidenceController',DetailIncidenceController);
 app.controller('IncidencesListController',IncidencesListController);
 app.controller('EditIncidenceController',EditIncidenceController);
 
-
-// Controllers implementantion:
 
 function InfoPopupController($scope,$uibModalInstance,content) {
     $scope.content = content;
