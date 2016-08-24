@@ -229,7 +229,18 @@ function EditIncidenceController($filter,$location,$routeParams,$scope,$uibModal
             }
          );
     };
-       
+
+    $scope.getAssignee = function() {
+        Incidence.get($scope.incidence.id).then(
+            function(response) {
+                $scope.incidence.technician = response.data.technician;
+            },
+            function(error) {
+                $location.path('/error');
+            }
+        );
+    };
+
     $scope.updateIncidence = function() {
         if (!$scope.editIncidenceForm.$valid)
             return;
@@ -266,12 +277,12 @@ function EditIncidenceController($filter,$location,$routeParams,$scope,$uibModal
             }
         );
     };
-    
+
     $scope.setAssignee = function() {
         if ($scope.assignedToMe) {
             Incidence.assignToMe($scope.incidence.id).then(
                 function(response) {
-                    $scope.init();
+                    $scope.getAssignee();
                 },
                 function(error) {
                     if (error.status == 401 || error.status == 403)
@@ -283,7 +294,7 @@ function EditIncidenceController($filter,$location,$routeParams,$scope,$uibModal
         } else {
             Incidence.free($scope.incidence.id).then(
                 function(response) {
-                    $scope.init();
+                    $scope.getAssignee();
                 },
                 function(error) {
                     if (error.status == 401 || error.status == 403)
