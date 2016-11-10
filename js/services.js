@@ -147,8 +147,8 @@ function Incidence($http,Token,URL_SERVER) {
     
     this.assignToMe = function(id) {
         return $http({
-            method: "PUT",
-            url: URL_SERVER + "/api/incidences/" + id + "/assignToMe",
+            method: "POST",
+            url: URL_SERVER + "/api/incidences/" + id + "/assignee",
             headers: {
                 'Authorization' : Token.get()
             }
@@ -157,8 +157,8 @@ function Incidence($http,Token,URL_SERVER) {
     
     this.free = function(id) {
         return $http({
-            method: "PUT",
-            url: URL_SERVER + "/api/incidences/" + id + "/free",
+            method: "DELETE",
+            url: URL_SERVER + "/api/incidences/" + id + "/assignee",
             headers: {
                 'Authorization' : Token.get()
             }
